@@ -1,0 +1,92 @@
+﻿@model NL_VAS.Entity.LandUse
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h3>General Information for Land Use</h3>
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <div class="p-20">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.LabelFor(model => model.GeneralInfoParcelId, "GeneralInfoParcelId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.DropDownList("GeneralInfoParcelId", null, htmlAttributes: new { @class = "form-control generalparcel" })
+                                @Html.ValidationMessageFor(model => model.GeneralInfoParcelId, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.LabelFor(model => model.LandTypeId, "LandTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.DropDownList("LandTypeId", null, htmlAttributes: new { @class = "form-control landtype" })
+                                @Html.ValidationMessageFor(model => model.LandTypeId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class=" form-group row col-lg-12 col-sm-12">
+                            @foreach (var land in ViewBag.LandSetting)
+                            {
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="portlet">
+                                        <div class="portlet-heading bg-primary">
+                                            <h5 class="portlet-title">
+                                                <label class="control-label col-md-2">@land.Name</label>
+                                            </h5>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="bg-primary1" class="panel-collapse collapse show">
+                                            <div class="portlet-body">
+                                                <div class="col-md-10">
+                                                    <input type="text" class="form-control" id="@land.Name" disabled="disabled"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-12">
+                            <input type="submit" value="Create" class="btn btn-default pull-right" />
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end card-box -->
+        </div> <!-- end col -->
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(".landtype").on("change", function () {
+            console.log($('.generalparcel').val());
+            $.ajax({
+                type: "GET",
+                url: "/LandUses/results",
+                data: { generalid: $('.generalparcel').val(), landtype: $(this).val() },
+                dataType: "json",
+                success: function (data) {
+                    $('.textclear').val("");
+                    data.forEach(function (element) {
+                        console.log(element);
+                        $('#' + element.LandSetting).val(element.Value);
+                    })
+
+                }
+            });
+        });
+    </script>
+
+}

@@ -1,0 +1,199 @@
+﻿@model NL_VAS.ViewModel.GeneralInfoParcelViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h3>Information for General Parcel</h3>
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <div class="p-20">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.ParcelNo)
+                                @Html.EditorFor(model => model.ParcelNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ParcelNo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.OwnerName)
+                                @Html.EditorFor(model => model.OwnerName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.OwnerName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.Ropani)
+                                @Html.EditorFor(model => model.Ropani, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Ropani, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.Aana)
+                                @Html.EditorFor(model => model.Aana, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Aana, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.Paisa)
+                                @Html.EditorFor(model => model.Paisa, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Paisa, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.Daam)
+                                @Html.EditorFor(model => model.Daam, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Daam, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.District)
+                                @Html.EditorFor(model => model.District, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.VDCMunicipality)
+                                @Html.EditorFor(model => model.VDCMunicipality, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.VDCMunicipality, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.Ward)
+                                @Html.EditorFor(model => model.Ward, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Ward, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.MapsheetNo)
+                                
+                                    @Html.EditorFor(model => model.MapsheetNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MapsheetNo, "", new { @class = "text-danger" })
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.sqmeter)
+                                @Html.EditorFor(model => model.sqmeter, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.sqmeter, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DisplayNameFor(model => model.TotalArea)
+                                @Html.EditorFor(model => model.TotalArea, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TotalArea, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class=" form-group row col-lg-12 col-sm-12">
+                            @foreach (var landsetting in ViewBag.LandSettingID)
+                            {
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="portlet">
+                                        <div class="portlet-heading bg-primary">
+                                            <h5 class="portlet-title">
+                                                <label class="col-md-2">@landsetting.Name</label>
+                                            </h5>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="bg-primary1" class="panel-collapse collapse show">
+                                            <div class="portlet-body">
+                                                @foreach (var landsettingtype in landsetting.LandSettingType)
+                                                {
+                                                    <label class="col-md-2">@landsettingtype.Name</label>
+                                                    <select class="form-control" name="types[]">
+                                                        @foreach (var landsettingvalue in landsettingtype.LandSettingValue)
+                                                        {
+                                                            <option class="col-md-4" value="@landsettingvalue.Id">@landsettingvalue.Name</option>
+                                                        }
+                                                    </select>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+
+
+
+
+
+                    </form>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12">
+                        <input type="submit" value="Create" class="btn btn-default pull-right" />
+                    </div>
+                </div>
+
+            </div> <!-- end card-box -->
+            </div> <!-- end col -->
+        </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+
+        $(function () {
+
+            $("#landSetting").on('change', function () {
+                //$("#landSetting").empty();
+                var landSetting = $('#landSetting').val();
+                console.log(landSetting);
+                $.ajax({
+                    type: "GET",
+                    url: "/GeneralInfoParcels/GetLandSetting",
+                    data: { Id: $('#landSetting').val() },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        $.each(data, function (i, data) {
+                            var div_data = "<option value=" + data.Id + ">" + data.Name + "</option>";
+                            $(div_data).appendTo('#landSettingvalue');
+                        });
+                        var default_Data = "<option value='' selected>Select Option</option>";
+                        $(default_Data).appendTo("#landSettingvalue");
+                    }
+                });
+            });
+
+           
+            
+            $('#Daam').change(function () { calculatesquaremeter(); });
+            
+
+        });
+        function calculatesquaremeter() {           
+            var ropani = 508.74;
+            var aana = 31.79;
+            var paisa = 7.94;
+            var dam = 1.99;
+            var textropani = parseFloat($('#Ropani').val());
+            var textaana = parseFloat($('#Aana').val());
+            var textpaisa = parseFloat($('#Paisa').val());
+            var textdam = parseFloat($('#Daam').val());
+            var calculatetotal = (ropani * textropani) + (aana * textaana) + (paisa * textpaisa) + (dam * textdam);
+            $('#sqmeter').val(calculatetotal);
+        }
+        populateCountries("country", "state");
+        populateCountries("country2");
+
+    </script>
+}

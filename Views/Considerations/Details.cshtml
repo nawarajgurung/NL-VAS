@@ -1,0 +1,58 @@
+﻿@model NL_VAS.Entity.Consideration
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="m-b-30">
+                        <button id="addToTable" class="btn btn-success waves-effect waves-light" onclick="window.location.href='@Url.Action("Create","Considerations")'">Create New <i class="mdi mdi-plus-circle-outline"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.FactorValue.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FactorValue.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.GeneralInfoParcel.ParcelNo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.GeneralInfoParcel.ParcelNo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Value)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Value)
+                </dd>
+
+            </dl>
+
+
+        </div>
+    </div>
+</div>
+

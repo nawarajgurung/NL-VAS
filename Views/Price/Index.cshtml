@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<h3>Information for General Parcel</h3>
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="p-20">
+                @using (Html.BeginForm("Create", "Price"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-sm-6">
+                                <label>Reference Plot</label>
+                                @Html.DropDownList("GeneralParcel", null, htmlAttributes: new { @class = "form-control landtype", id = "generalparcel" })
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <label>Asked Price</label>
+                                @Html.TextBox("AskedPrice", null, htmlAttributes: new { @class = "form-control landtype", id = "askedprice" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-sm-6">
+                                <label>Total Score</label>
+                                @Html.TextBox("TotalScore", null, htmlAttributes: new { @class = "form-control landtype", id = "totalscore" })
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <label>Per Unit Price</label>
+                                @Html.TextBox("PerUnitPrice", null, htmlAttributes: new { @class = "form-control landtype", id = "perunitprice" })
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-default" value="Save" />
+
+
+
+
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="p-20">
+                <div class="col-md-12">
+                    <h3>Reference Entry</h3>
+                </div>
+             
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Reference Plot</label>
+                        <div class="col-4">
+                            @Html.DropDownList("PriceSetting", null, htmlAttributes: new { @class = "form-control landtype", id = "pricesetting" })
+                        </div>
+                        <div class="col-lg-6 col-sm-6 pull-right">
+                            <button class="btn btn-default pull-right" id="applytoallexistingparcel">Apply to All Existing Parcel</button>
+                        </div>
+                    </div>
+                
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Parcel No</th>
+                        <th>Name</th>
+                        <th>Map SheetNo</th>
+                        <th>Net Score</th>
+                        <th>Base Parcel</th>
+                        <th>Per Unit Price</th>
+                        <th>Per Unit Per SQMT Price</th>
+                        <th>Per SQMT Price</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody id="totalresult"></tbody>
+            </table>
+        </div>
+        </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section Scripts{
+    <script>
+        var erro = '@(TempData["error"])';
+        if(erro != '') {
+            alert(erro);
+        }
+        $("#askedprice")
+            .focusout(function () {
+                var askedprice = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/price/TotalScore",
+                    data: "id=" + $('#generalparcel').val(),
+                    enctype: 'multipart/form-data',
+                    success: function (res) {
+                        $('#totalscore').val(res);
+                        $('#perunitprice').val(askedprice / res);
+                    }
+                });
+            });
+
+        $('#applytoallexistingparcel').click(function () {
+            console.log($('#pricesetting').text());
+            if ($('#pricesetting').val() == null) {
+                alert("Please Select Plot");
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/price/TotalScoreResult",
+                data: { "id": $('#pricesetting').text(), "price": $('#pricesetting').val() },
+                enctype: 'multipart/form-data',
+                success: function (res) {
+                    console.log(res);
+                    var i = 1;
+                    res.forEach(value => {
+                        var row = "<tr>" +
+                            "<td>" + i + "</td>" +
+                            "<td>" + value.ParacelNo + "</td>" +
+                            "<td>" + value.Name + "</td>" +
+                            "<td>" + value.MapSheetNo + "</td>" +
+                            "<td>" + value.NetScore + "</td>" +
+                            "<td>" + value.BaseId + "</td>" +
+                            "<td>" + value.PerUnitPrice + "</td>" +
+                            "<td>" + value.PerUnitSquareMeterPrice + "</td>" +
+                            "<td>" + value.PerSquaremeterPrice + "</td>" +
+                            "<td>" + value.TotalPrice + "</td>" +
+                            
+                            "</tr>";
+                        $('#totalresult').append(row);
+                        console.log(value);
+                        i++;
+                    })
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        });
+    </script>
+}

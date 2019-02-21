@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from coderthemes.com/ubold_2.3/b4/light/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 24 Jun 2017 07:35:33 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    <meta name="author" content="Coderthemes">
+    <link rel="shortcut icon" href="assets/images/favicon_1.ico">
+    <title>@ViewBag.Title - National Land Valuation Appraisal System</title>
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="assets/plugins/morris/morris.css">
+    <link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Content/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/theme/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/theme/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/theme/css/style.css" rel="stylesheet" type="text/css" />
+    <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <script src="assets/js/modernizr.min.js"></script>
+    <style type="text/css">
+        .pagination {
+        }
+
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+                transition: background-color .3s;
+                border: 1px solid #ddd;
+            }
+
+                .pagination a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+                .pagination a:hover:not(.active) {
+                    background-color: #ddd;
+                }
+    </style>
+
+</head>
+
+<body class="fixed-left">
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- Top Bar Start -->
+        <div class="topbar">
+            <!-- LOGO -->
+            <div class="topbar-left">
+                <div class="text-center">
+                    <a href="@Url.Action("index","home")" class="logo"></a>
+                    <!-- Image Logo here -->
+                    <a href="index.html" class="logo">
+                    <i class="icon-c-logo"> <img src="~/theme/images/logo.png" height="42"/> </i>
+                    <span><img src="~/theme/images/logo.png" height="42"/></span>
+                    </a>
+                </div>
+            </div>
+            <!-- Button mobile view to collapse sidebar menu -->
+            <nav class="navbar-custom">
+                <ul class="list-inline float-right mb-0">                    
+                    <li class="list-inline-item dropdown notification-list">
+                        <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <img src="~/theme/images/logo1.png" alt="user" class="rounded-circle">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown " aria-labelledby="Preview">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5 class="text-overflow"><small>Welcome</small> </h5>
+                            </div>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="zmdi zmdi-account-circle"></i> <span>Profile</span>
+                            </a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="zmdi zmdi-settings"></i> <span>Settings</span>
+                            </a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="zmdi zmdi-lock-open"></i> <span>Lock Screen</span>
+                            </a>
+                            <!-- item-->
+                            @Html.Partial("_LoginPartial")
+                            <a href="javascript:document.getElementById('logoutForm').submit();" class="dropdown-item notify-item">
+                                <i class="zmdi zmdi-power"></i> <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-inline menu-left mb-0">
+                    <li class="float-left">
+                        <button class="button-menu-mobile open-left waves-light waves-effect">
+                            <i class="dripicons-menu"></i>
+                        </button>
+                    </li>
+                    
+                </ul>
+            </nav>
+        </div>
+        <!-- Top Bar End -->
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+            <div class="sidebar-inner slimscrollleft">
+                <!--- Divider -->
+                <div id="sidebar-menu">
+                    @if (User.IsInRole("Admin"))
+                    {
+                    <ul>
+                        <li class="text-muted menu-title">Navigation</li>
+                        <li class="has_sub">
+                            <a href="@Url.Action("Index", "Home")" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>                           
+                        </li>
+
+                        
+
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-settings"></i><span>Settings </span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li class="has_sub">
+                                    <a href="javascript:void(0);" class="waves-effect"><span>General</span>  <span class="menu-arrow"></span></a>
+                                    <ul style="">
+                                        <li>@Html.ActionLink("Land Setting", "Index", "LandSettings")</li>
+                                        <li>@Html.ActionLink("Land Setting Type", "Index", "LandSettingTypes")</li>
+                                        <li>@Html.ActionLink("Land Setting Type Value", "Index", "LandSettingTypeValues")</li>
+                                    </ul>
+                                </li>
+                                <li class="has_sub">
+                                    <a href="javascript:void(0);" class="waves-effect"><span>Land Use</span>  <span class="menu-arrow"></span></a>
+                                    <ul style="">
+                                        <li>@Html.ActionLink("Land Use", "Index", "LandTypes")</li>
+                                        <li>@Html.ActionLink("Land Type Settings", "Index", "LandTypeSettings")</li>
+                                    </ul>
+                                </li>
+
+                                <li class="has_sub">
+                                    <a href="javascript:void(0);" class="waves-effect"><span>Factors</span>  <span class="menu-arrow"></span></a>
+                                    <ul style="">
+                                        <li>@Html.ActionLink("Factor", "Index", "Factors")</li>
+                                        <li>@Html.ActionLink("Factor Value", "Index", "FactorValues")</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-layout-column3"></i><span>General</span>  <span class="menu-arrow"></span></a>
+                            <ul style="">
+                                <li>@Html.ActionLink("Data Entry", "index", "GeneralInfoParcels")</li>
+                                <li>@Html.ActionLink("Land Use", "Index", "LandUses")</li>
+                                <li>@Html.ActionLink("Consideration", "Index", "Considerations")</li>
+                                <li>@Html.ActionLink("Cadestral Map", "Map", "Home")</li>
+                            </ul>
+
+                        </li>
+                        <li class="has_sub">
+                            <a href="@Url.Action("index", "Reports")" class="waves-effect"><i class="ti-bar-chart"></i> <span> Score Report</span></a>
+                           
+                        </li>
+                        <li class="has_sub">
+                            <a href="@Url.Action("index", "Price")" class="waves-effect"><i class="ti-bar-chart"></i> <span> Price</span></a>
+
+                        </li>
+                    </ul>
+                    }
+                    else
+                    {
+                        <ul>
+                            <li class="text-muted menu-title">Navigation</li>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span> <span class="menu-arrow"></span></a>
+                            </li>                            
+                            <li class="has_sub">
+                                <a href="@Url.Action("index", "GeneralInfoParcels")" class="waves-effect"><i class="ti-home"></i> <span> GeneralParcel </span></a>
+
+                            </li>
+                            <li class="has_sub">
+                                <a href="@Url.Action("index", "Reports")" class="waves-effect"><i class="ti-home"></i> <span>Score Report </span></a>
+
+                            </li>
+                        </ul>
+                    }
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="container">
+                    <!-- Page-Title -->
+                   @RenderBody()
+                    <!-- end row -->
+
+                </div> <!-- container -->
+            </div> <!-- content -->
+            <footer class="footer text-right">
+                &copy; 2016 - 2017. All rights reserved.
+            </footer>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+        <!-- Right Sidebar -->
+        <div class="side-bar right-bar nicescroll">
+            <h4 class="text-center">Chat</h4>
+            <div class="contact-list nicescroll">
+                <ul class="list-group contacts-list">
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="avatar">
+                                <img src="assets/images/users/avatar-1.jpg" alt="">
+                            </div>
+                            <span class="name">Chadengle</span>
+                            <i class="fa fa-circle online"></i>
+                        </a>
+                        <span class="clearfix"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="avatar">
+                                <img src="assets/images/users/avatar-2.jpg" alt="">
+                            </div>
+                            <span class="name">Tomaslau</span>
+                            <i class="fa fa-circle online"></i>
+                        </a>
+                        <span class="clearfix"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="avatar">
+                                <img src="assets/images/users/avatar-3.jpg" alt="">
+                            </div>
+                            <span class="name">Stillnotdavid</span>
+                            <i class="fa fa-circle online"></i>
+                        </a>
+                        <span class="clearfix"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="avatar">
+                                <img src="assets/images/users/avatar-4.jpg" alt="">
+                            </div>
+                            <span class="name">Kurafire</span>
+                            <i class="fa fa-circle online"></i>
+                        </a>
+                        <span class="clearfix"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="avatar">
+                                <img src="assets/images/users/avatar-5.jpg" alt="">
+                            </div>
+                            <span class="name">Shahedk</span>
+                            <i class="fa fa-circle away"></i>
+                        </a>
+                        <span class="clearfix"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="avatar">
+                                <img src="assets/images/users/avatar-6.jpg" alt="">
+                            </div>
+                            <span class="name">Adhamdannaway</span>
+                            <i class="fa fa-circle away"></i>
+                        </a>
+                        <span class="clearfix"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="avatar">
+                                <img src="assets/images/users/avatar-7.jpg" alt="">
+                            </div>
+                            <span class="name">Ok</span>
+                            <i class="fa fa-circle away"></i>
+                        </a>
+                        <span class="clearfix"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="avatar">
+                                <img src="assets/images/users/avatar-8.jpg" alt="">
+                            </div>
+                            <span class="name">Arashasghari</span>
+                            <i class="fa fa-circle offline"></i>
+                        </a>
+                        <span class="clearfix"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="avatar">
+                                <img src="assets/images/users/avatar-9.jpg" alt="">
+                            </div>
+                            <span class="name">Joshaustin</span>
+                            <i class="fa fa-circle offline"></i>
+                        </a>
+                        <span class="clearfix"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">
+                            <div class="avatar">
+                                <img src="assets/images/users/avatar-10.jpg" alt="">
+                            </div>
+                            <span class="name">Sortino</span>
+                            <i class="fa fa-circle offline"></i>
+                        </a>
+                        <span class="clearfix"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /Right-bar -->
+    </div>
+    <!-- END wrapper -->
+
+    <script>
+            var resizefunc = [];
+    </script>
+    <script src="~/Scripts/country.js"></script>
+    <script src="~/Scripts/city_state.js"></script>
+    <!-- jQuery  -->
+    @*<script src="~/Scripts/buttons.bootstrap4.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>*@
+    <script src="~/theme/js/jquery.min.js"></script>
+    <script src="~/theme/js/tether.min.js"></script><!-- Tether for Bootstrap -->
+    <script src="~/theme/js/bootstrap.min.js"></script>
+    <script src="~/theme/js/detect.js"></script>
+    <script src="~/theme/js/fastclick.js"></script>
+    <script src="~/theme/js/jquery.slimscroll.js"></script>
+    <script src="~/theme/js/jquery.blockUI.js"></script>
+    <script src="~/theme/js/waves.js"></script>
+    <script src="~/theme/js/wow.min.js"></script>
+    <script src="~/theme/js/jquery.nicescroll.js"></script>
+    <script src="~/theme/js/jquery.scrollTo.min.js"></script>
+    <script src="~/theme/plugins/peity/jquery.peity.min.js"></script>
+    <!-- jQuery  -->
+    <script src="~/theme/plugins/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="~/theme/plugins/counterup/jquery.counterup.min.js"></script>
+    <script src="~/theme/plugins/morris/morris.min.js"></script>
+    <script src="~/theme/plugins/raphael/raphael-min.js"></script>
+    <script src="~/theme/plugins/jquery-knob/jquery.knob.js"></script>
+    <script src="~/theme/pages/jquery.dashboard.js"></script>
+    <script src="~/theme/js/jquery.core.js"></script>
+    <script src="~/theme/js/jquery.app.js"></script>
+    <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                $('.counter').counterUp({
+                    delay: 100,
+                    time: 1200
+                });
+
+                $(".knob").knob();
+
+            });
+    </script>
+    @RenderSection("scripts", required: false)
+
+</body>
+<!-- Mirrored from coderthemes.com/ubold_2.3/b4/light/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 24 Jun 2017 07:36:39 GMT -->
+</html>

@@ -1,0 +1,98 @@
+﻿@model NL_VAS.Entity.GeneralInfoParcel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GeneralInfoParcel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ParcelNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParcelNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ropani)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ropani)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aana)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aana)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Daam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Daam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Paisa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paisa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MapsheetNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapsheetNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.District)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.District)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VDCMunicipality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VDCMunicipality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ward)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ward)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

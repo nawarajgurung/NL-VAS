@@ -1,0 +1,129 @@
+﻿@model PagedList.PagedList<NL_VAS.Entity.GeneralInfoParcel>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="m-b-30">
+                        <button id="addToTable" class="btn btn-success waves-effect waves-light" onclick="window.location.href='@Url.Action("Create","GeneralInfoParcels")'">Create New <i class="mdi mdi-plus-circle-outline"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-rep-plugin">
+                <div class="table-responsive" data-pattern="priority-columns">
+                    <table class="table table-striped add-edit-table" id="datatable-editable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Parcel Number
+                                </th>
+                                <th>
+                                    Map Sheet Number
+                                </th>
+                                <th>
+                                    Owner Name
+                                </th>
+                                <th>
+                                    Ropani
+                                </th>
+                                <th>
+                                    Aana
+                                </th>
+                                <th>
+                                    Paisa
+                                </th>
+                                <th>
+                                    Daam
+                                </th>
+
+                                <th>
+                                    District
+                                </th>
+                                <th>
+                                    VDC/Municipality
+                                </th>
+
+                                <th>
+                                    Ward
+                                </th>
+                                <th>
+                                    Total Area
+                                </th>
+                                <th>
+                                    Square Meter
+                                </th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ParcelNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MapsheetNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OwnerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Ropani)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Aana)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Daam)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Paisa)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.District)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VDCMunicipality)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Ward)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalArea)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sqmeter)
+                                </td>
+                                <td class="actions">
+                                    <a href="@Url.Action("Edit", new { id = item.Id })" class="on-default edit-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                    <a href="@Url.Action("Delete", new { id = item.Id })" class="on-default remove-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                                    @*<a href="@Url.Action("Details", new { id = item.Id })" class="hidden on-editing save-row" data-toggle="tooltip" data-placement="top" title="" data-original-title="Details"><i class="fa fa-info"></i></a>*@
+                                </td>
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    <div class="col-center">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", "GeneralInfoParcels", new { page, pageSize = Model.PageSize }))
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

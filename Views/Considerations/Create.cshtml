@@ -1,0 +1,105 @@
+﻿@model NL_VAS.ViewModel.ConsiderationViewModel
+
+@{
+    ViewBag.Title = "Create";
+    var i = 0;
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <div class="p-20">
+                    <div class="form-horizontal">
+                        <h4>Consideration | Basic Information</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.GeneralParcelId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("GeneralParcelId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.GeneralParcelId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row col-lg-12 col-sm-12">
+                            @foreach (var Factor in ViewBag.factor)
+                            {
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="portlet">
+                                        <div class="portlet-heading bg-primary">
+                                            <h5 class="portlet-title">
+                                                <label class="col-md-4">@Factor.Name</label>
+                                            </h5>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="bg-primary1" class="panel-collapse collapse show">
+                                            <div class="portlet-body">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                Name
+                                                            </th>
+                                                            <th>
+                                                                Increase/Descrease
+                                                            </th>
+                                                            <th>
+                                                                Increase/Descrease Value
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var FactorValue in Factor.FactorValue)
+                                                        {
+
+                                                            <tr>
+                                                                <td>@FactorValue.Name</td>
+                                                                <td>
+                                                                    @Html.EditorFor(m => m.considerationList[i].Status)
+                                                                    @*<input type="checkbox" name="Status[]" id="Status"  />*@
+                                                                    @*@Html.EditorFor(model => model.Status)*@
+                                                                </td>
+                                                                <td>
+                                                                    @Html.EditorFor(m => m.considerationList[i].Value, new { htmlAttributes = new { @class = "form-control factorvalue", data_values = FactorValue.id, data_id = FactorValue.id } })
+                                                                    @*<input type="text" name="Value[]" id="Value" class="form-control factorvalue" data-values="@FactorValue.id" data-id="@FactorValue.id"/>*@
+                                                                </td>
+                                                            </tr>
+                                                            <input type="hidden" name="considerationList[@i].FactorValueId" id="@FactorValue.id" value="@FactorValue.id"/>
+                                                            @*<input type="text" name="FactorValueId[]" id="@FactorValue.id" />*@
+                                                            i++;
+
+                                                        }
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default pull-right" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                    </div>
+                </div>
+            </div>
+        </div> }
+
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                        <script>
+                            $('.factorvalue').on('change', function () {
+                                var value = $(this).data("values");
+                                var id = $(this).data("id");
+                                console.log(id);
+                                $('#' + id).val(value);
+                            })
+                        </script>
+                    }

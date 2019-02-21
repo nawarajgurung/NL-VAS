@@ -1,0 +1,155 @@
+﻿@model NL_VAS.Entity.GeneralInfoParcel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="card-box">
+    <!-- Pricing Item -->
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="pricing-item">
+            <div class="pricing-item-inner">
+                <div class="pricing-wrap">
+                    <!-- Icon (Simple-line-icons) -->
+                    <div class="pricing-icon">
+                        <i class="ion-android-trash text-danger"></i>
+                    </div>
+                    <!-- Pricing Title -->
+                    <div class="pricing-title text-danger">
+                        Delete?
+                    </div>
+                    <!-- Pricing Features -->
+                    <div class="pricing-features">
+                        <h3>Are you sure you want to delete this?</h3>
+
+                        <dl class="dl-horizontal">
+                            <dt>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ParcelNo)
+                            </dt> 
+                            <dd>
+                                @Html.DisplayFor(model => model.ParcelNo)
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="pr-button">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    <!-- End Pricing Item -->
+
+</div>
+
+@*<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>GeneralInfoParcel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ParcelNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParcelNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ropani)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ropani)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aana)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aana)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Daam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Daam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Paisa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paisa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MapsheetNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapsheetNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.District)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.District)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VDCMunicipality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VDCMunicipality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ward)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ward)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>*@

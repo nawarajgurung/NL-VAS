@@ -1,0 +1,75 @@
+﻿@model NL_VAS.Entity.LandTypeSetting
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="card-box">
+    <!-- Pricing Item -->
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="pricing-item">
+            <div class="pricing-item-inner">
+                <div class="pricing-wrap">
+                    <!-- Icon (Simple-line-icons) -->
+                    <div class="pricing-icon">
+                        <i class="ion-android-trash text-danger"></i>
+                    </div>
+                    <!-- Pricing Title -->
+                    <div class="pricing-title text-danger">
+                        Delete?
+                    </div>
+                    <!-- Pricing Features -->
+                    <div class="pricing-features">
+                        <h3>Are you sure you want to delete this?</h3>
+
+                        <dl class="dl-horizontal">
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.LandSetting.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.LandSetting.Name)
+                            </dd>
+
+                            @*<dt>
+                                @Html.DisplayNameFor(model => model.LandType.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.LandType.Name)
+                            </dd>*@
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.value)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.value)
+                            </dd>
+
+                        </dl>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="pr-button">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    <!-- End Pricing Item -->
+
+</div>

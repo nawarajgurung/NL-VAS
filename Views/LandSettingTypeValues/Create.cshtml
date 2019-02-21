@@ -1,0 +1,67 @@
+﻿@model NL_VAS.Entity.LandSettingTypeValue
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box">
+                <h2>Basic Information for Land Setting Type Values</h2>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="p-20">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group row">
+                                    <div class="col-lg-12 col-sm-12">
+                                        @Html.LabelFor(model => model.Name)
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-lg-6 col-sm-6">
+                                        @Html.LabelFor(model => model.Value)
+                                        @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6">
+                                        @Html.DisplayNameFor(model => model.LandSettingTypeId)
+                                        @Html.DropDownList("LandSettingTypeId", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.LandSettingTypeId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-12">
+                            <input type="submit" value="Create" class="btn btn-default pull-right" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end row -->
+
+        </div> <!-- end card-box -->
+    </div><!-- end col -->
+
+    }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

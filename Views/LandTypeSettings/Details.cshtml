@@ -1,0 +1,65 @@
+﻿@model NL_VAS.Entity.LandTypeSetting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="card-box">
+    <!-- Pricing Item -->
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="pricing-item">
+            <div class="pricing-item-inner">
+                <div class="pricing-wrap">
+                    <!-- Icon (Simple-line-icons) -->
+                    <div class="pricing-icon">
+                        <i class="ion-android-information text-info"></i>
+                    </div>
+                    <!-- Pricing Title -->
+                    <div class="pricing-title text-info">
+                        Details
+                    </div>
+                    <!-- Pricing Features -->
+                    <div class="pricing-features">
+                        <h3>Land Setting Type Details:</h3>
+
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.LandSetting.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.LandSetting.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.LandType.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.LandType.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.value)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.value)
+                            </dd>
+                            </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+
+    <!-- End Pricing Item -->
+
+</div>

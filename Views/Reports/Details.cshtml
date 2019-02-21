@@ -1,0 +1,102 @@
+﻿@model NL_VAS.ViewModel.ReportsViewModel
+<h2>Parcelwise Scoring</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="card-box">
+            <div class="row">
+                <table class="table table-striped add-edit-table" id="datatable-editable">
+                    <thead class="thead-default">
+                        <tr>
+                            <th>Parcel No</th>
+                            <th>Map Sheet No</th>
+                            <th>Owner Name</th>
+                            <th>Ropani</th>
+                            <th>Aana</th>
+                            <th>Paisa</th>
+                            <th>Daam</th>
+                            <th>District</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.GeneralInfoParcel.ParcelNo</td>
+                            <td>@Model.GeneralInfoParcel.MapsheetNo</td>
+                            <td>@Model.GeneralInfoParcel.OwnerName</td>
+                            <td>@Model.GeneralInfoParcel.Ropani</td>
+                            <td>@Model.GeneralInfoParcel.Aana</td>
+                            <td>@Model.GeneralInfoParcel.Paisa</td>
+                            <td>@Model.GeneralInfoParcel.Daam</td>
+                            <td>@Model.GeneralInfoParcel.District</td>
+                        </tr>
+
+                        @foreach (var dataentry in Model.DataEntry)
+            {
+                            <tr>
+                                <td colspan="7">@dataentry.Name</td>
+                                <td>@dataentry.Value</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="7">Total</td>
+                            <td>@Model.DataEntry.Sum(m => m.Value)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="background-color:#4390BC;"><h4 style="color:white;">Land Use</h4></td>
+                        </tr>
+                        @foreach (var landuse in Model.LandUse)
+            {
+                            <tr>
+                                <td colspan="7">@landuse.LandSetting</td>
+                                <td>@landuse.Value</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="7">Total</td>
+                            <td>@Model.LandUse.Sum(m => m.Value)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="background-color:#4390BC;color:white"><h4 style="color:white;">Factor</h4></td>
+                        </tr>
+                        @foreach (var factor in Model.Factor)
+                        {
+                            <tr>
+                                <td colspan="6">@factor.Name</td>
+                                @if (factor.status)
+                                {
+                                    <td>Increase</td>
+                                }
+                                else
+                                {
+                                    <td>Decrease</td>
+                                }
+                                <td>@factor.percentage | @{ var test = (Model.DataEntry.Sum(m => m.Value) + Model.LandUse.Sum(m => m.Value)) * factor.percentage / 100; @test;}</td>
+
+                            </tr>
+                                    }
+                        <tr>
+                            <td colspan="7"><h5>Net Score</h5></td>
+                            <td>
+                                @{ decimal total = Model.LandUse.Sum(m => m.Value) + Model.DataEntry.Sum(m => m.Value);}
+                                @foreach (var factor in Model.Factor)
+                                {
+                                    if (factor.status)
+                                    {
+                                        total = total + (Model.DataEntry.Sum(m => m.Value) + Model.LandUse.Sum(m => m.Value)) * factor.percentage / 100;
+                                    }
+                                    else
+                                    {
+                                        total = total - (Model.DataEntry.Sum(m => m.Value) + Model.LandUse.Sum(m => m.Value)) * factor.percentage / 100;
+
+                                    }
+                                }
+                                @total
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
